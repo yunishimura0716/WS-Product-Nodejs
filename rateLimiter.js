@@ -6,7 +6,12 @@ const redis = require('redis');
  * Algorithm is sliding window counter
  */
 
-const redis_client = redis.createClient(6379, 'redis');
+let redis_client;
+if (process.env.REDIS_URL) {
+    redis_client = redis.createClient(process.env.REDIS_URL);
+} else {
+    redis_client = redis.createClient(6379, 'redis');
+}
 const window_size_in_hours = 1;
 const max_window_requests = 100;
 const window_log_interval_in_minutes = 10;
