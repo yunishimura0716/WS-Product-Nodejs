@@ -13,3 +13,11 @@ services:
     environment:
       - NODE_ENV=development
     command: npm run dev
+    depends_on:
+      - redis
+  redis:
+    image: "redis:latest"
+    ports:
+      - "6379:6379"
+    volumes:
+      - "./data/redis:/data"

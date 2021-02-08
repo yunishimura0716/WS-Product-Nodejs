@@ -1,16 +1,26 @@
+const RateLimiter = require('./rateLimiter');
 const express = require('express')
 const pg = require('pg')
 
 const app = express()
 // configs come from standard PostgreSQL env vars
 // https://www.postgresql.org/docs/9.6/static/libpq-envars.html
-const pool = new pg.Pool()
+const pool = new pg.Pool({
+  user: process.env.PGUSER,
+  host: process.env.PGHOST,
+  database: process.env.PGDATABASE,
+  password: process.env.PGPASSWORD,
+  port: process.env.PGPORT,
+})
 
 const queryHandler = (req, res, next) => {
   pool.query(req.sqlQuery).then((r) => {
     return res.json(r.rows || [])
   }).catch(next)
 }
+
+// set rate limiting to all endopiont
+app.use(RateLimiter);
 
 app.get('/', (req, res) => {
   res.send('Welcome to EQ Works 😎')
