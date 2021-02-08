@@ -30,3 +30,8 @@ The following are the recommended options, but you're free to use any means to g
 ### Notes on working through the problems
 
 Make sure any additional Node.js level dependencies are properly added in `package.json`. We encourage a healthy mixture of your own implementations, and good choices of existing open-source libraries/tools. We will comment in the problems to indicate which ones cannot be solved purely through an off-the-shelf solution.
+
+## My Notes
+- Used sliding window counter algorithm to implement rate limiting
+- The code is doployed on heroku => https://yu-ws-product-nodejs.herokuapp.com/ 
+  - This heroku server is running on free version, so it will sleep if we do not access for 30 minutes
