@@ -4,9 +4,9 @@ FROM node:latest
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
+RUN npm install -g npm@7.5.2
 COPY package.json /usr/src/app/
 RUN npm install --silent
 
 COPY . /usr/src/app
-RUN npm install -g npm@7.5.2
 CMD ["npm", "start"]
